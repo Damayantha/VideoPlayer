@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.cyberkey.commons.views.MySearchMenu
+        android:id="@+id/search_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/search_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.cyberkey.commons.views.MyTextView
+            android:id="@+id/search_empty_text_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.8"
+            android:gravity="center_horizontal"
+            android:paddingStart="@dimen/activity_margin"
+            android:paddingTop="@dimen/activity_margin"
+            android:paddingEnd="@dimen/activity_margin"
+            android:text="@string/no_media_with_filters"
+            android:textSize="@dimen/bigger_text_size"
+            android:textStyle="italic"
+            android:visibility="gone" />
+
+        <com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller
+            android:id="@+id/search_fastscroller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.cyberkey.commons.views.MyRecyclerView
+                android:id="@+id/search_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                app:layoutManager="com.cyberkey.commons.views.MyGridLayoutManager"
+                app:spanCount="@integer/media_columns_vertical_scroll" />
+
+        </com.qtalk.recyclerviewfastscroller.RecyclerViewFastScroller>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

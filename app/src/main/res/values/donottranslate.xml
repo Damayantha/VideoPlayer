@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cyberkey Gallery</string>
+    <string name="gif">GIF</string>
+    <string name="raw">RAW</string>
+    <string name="svg">SVG</string>
+    <string name="package_name">com.cyberkey.videoplayer</string>
+
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_launcher_name">Galerio</string>
+    <string name="edit">Redakti</string>
+    <string name="open_camera">Malfermi fotilon</string>
+    <string name="hidden">(kaŝita)</string>
+    <string name="pin_folder">Alpingli dosierujon</string>
+    <string name="unpin_folder">Depingli dosierujon</string>
+    <string name="pin_to_the_top">Alpingli supren</string>
+    <string name="all_folders">Ĉiuj dosierujoj</string>
+    <string name="other_folder">Alia dosierujo</string>
+    <string name="show_on_map">Montri sur mapo</string>
+    <string name="unknown_location">Nekonata loko</string>
+    <string name="volume">Laŭto</string>
+    <string name="brightness">Helo</string>
+    <string name="lock_orientation">Ŝlosi orientiĝon</string>
+    <string name="unlock_orientation">Malŝlosi orientiĝon</string>
+    <string name="change_orientation">Ŝanĝi orientiĝon</string>
+    <string name="fixing">Riparante…</string>
+    <string name="images">Bildoj</string>
+    <string name="videos">Filmoj</string>
+    <string name="gifs">GIF-filmetoj</string>
+    <string name="raw_images">RAW-bildoj</string>
+    <string name="svgs">SVG-bildoj</string>
+    <string name="portraits">Portretoj</string>
+</resources>
