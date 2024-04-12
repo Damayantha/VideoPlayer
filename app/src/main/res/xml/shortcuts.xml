@@ -2,11 +2,11 @@
     <shortcut
         android:shortcutId="videos"
         android:enabled="true"
-        android:icon="@mipmap/shortcut_videos"
+        android:icon="@mipmap/ic_app_launcher"
         android:shortcutShortLabel="@string/shortcut_videos">
         <intent
-            android:action="com.brouken.player.action.SHORTCUT_VIDEOS"
-            android:targetPackage="com.brouken.player"
-            android:targetClass="com.brouken.player.PlayerActivity" />
+            android:action="com.cyberkey.videoplayer.action.SHORTCUT_VIDEOS"
+            android:targetPackage="com.cyberkey.videoplayer"
+            android:targetClass="com.cyberkey.videoplayer.PlayerActivity" />
     </shortcut>
 </shortcuts>

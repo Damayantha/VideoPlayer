@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.brouken.player.dtpv.youtube.YouTubeOverlay
+    <com.cyberkey.videoplayer.dtpv.youtube.YouTubeOverlay
         android:id="@+id/youtube_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

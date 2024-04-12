@@ -1,4 +1,4 @@
-package com.brouken.player;
+package com.cyberkey.videoplayer;
 
 import android.content.Context;
 import android.net.Uri;
