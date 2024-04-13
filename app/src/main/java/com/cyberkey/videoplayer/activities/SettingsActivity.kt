@@ -1056,7 +1056,6 @@ class SettingsActivity : SimpleActivity() {
                 GROUP_DIRECT_SUBFOLDERS -> config.groupDirectSubfolders = value.toBoolean()
                 PINNED_FOLDERS -> config.addPinnedFolders(value.toStringSet())
                 DISPLAY_FILE_NAMES -> config.displayFileNames = value.toBoolean()
-                FILTER_MEDIA -> config.filterMedia = value.toInt()
                 DIR_COLUMN_CNT -> config.dirColumnCnt = value.toInt()
                 MEDIA_COLUMN_CNT -> config.mediaColumnCnt = value.toInt()
                 SHOW_ALL -> config.showAll = value.toBoolean()

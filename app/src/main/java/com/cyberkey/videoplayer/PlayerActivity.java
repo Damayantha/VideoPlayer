@@ -235,6 +235,20 @@ public class PlayerActivity extends Activity {
         } else {
             setContentView(R.layout.activity_player);
         }
+// Obtain the decor view of the window
+        View decorView = getWindow().getDecorView();
+
+// Set the system UI visibility flags
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+
+
 
         if (Build.VERSION.SDK_INT >= 31) {
             Window window = getWindow();

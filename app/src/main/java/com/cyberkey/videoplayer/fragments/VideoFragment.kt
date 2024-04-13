@@ -312,7 +312,7 @@ class VideoFragment : ViewPagerFragment() {
         binding = PagerVideoItemBinding.inflate(inflater, container, false).apply {
 
 
-            videoPlayOutline.setOnClickListener {+
+            videoPlayOutline.setOnClickListener {
 
                 launchVideoPlayer()
             }

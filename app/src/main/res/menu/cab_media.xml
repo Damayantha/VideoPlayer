@@ -21,23 +21,7 @@
         android:showAsAction="always"
         android:title="@string/share"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/cab_rotate"
-        android:icon="@drawable/ic_rotate_right_vector"
-        android:title="@string/rotate"
-        app:showAsAction="ifRoom">
-        <menu>
-            <item
-                android:id="@+id/cab_rotate_right"
-                android:title="@string/rotate_right" />
-            <item
-                android:id="@+id/cab_rotate_left"
-                android:title="@string/rotate_left" />
-            <item
-                android:id="@+id/cab_rotate_one_eighty"
-                android:title="@string/rotate_one_eighty" />
-        </menu>
-    </item>
+
     <item
         android:id="@+id/cab_properties"
         android:icon="@drawable/ic_info_vector"
@@ -78,16 +62,7 @@
         android:showAsAction="never"
         android:title="@string/open_with"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/cab_set_as"
-        android:showAsAction="never"
-        android:title="@string/set_as"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/cab_resize"
-        android:showAsAction="never"
-        android:title="@string/resize"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/cab_edit"
         android:icon="@drawable/ic_edit_vector"

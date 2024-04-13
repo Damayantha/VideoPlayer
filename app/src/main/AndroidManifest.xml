@@ -268,7 +268,9 @@
         <activity
             android:name=".activities.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="true">
+            android:exported="true"
+            android:label="Viewer"
+            android:icon="@mipmap/ic_viewer">
             <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
 
@@ -373,6 +375,8 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout|smallestScreenSize|uiMode|touchscreen"
             android:exported="true"
             android:launchMode="singleTask"
+            android:label="Player"
+            android:icon="@mipmap/ic_player"
             android:supportsPictureInPicture="true"
             tools:targetApi="n">
             <!--            <intent-filter>-->

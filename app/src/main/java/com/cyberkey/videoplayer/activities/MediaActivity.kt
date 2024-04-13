@@ -25,6 +25,7 @@ import com.cyberkey.commons.models.FileDirItem
 import com.cyberkey.commons.models.RadioItem
 import com.cyberkey.commons.views.MyGridLayoutManager
 import com.cyberkey.commons.views.MyRecyclerView
+import com.cyberkey.videoplayer.PlayerActivity
 import com.cyberkey.videoplayer.R
 import com.cyberkey.videoplayer.adapters.MediaAdapter
 import com.cyberkey.videoplayer.asynctasks.GetMediaAsynctask
@@ -56,7 +57,6 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
     private var mShowAll = false
     private var mLoadedInitialPhotos = false
     private var mWasFullscreenViewOpen = false
-    private var mWasUpgradedFromFreeShown = false
     private var mLastSearchedText = ""
     private var mLatestMediaId = 0L
     private var mLatestMediaDateId = 0L
@@ -116,9 +116,6 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
             registerFileUpdateListener()
         }
 
-        binding.mediaEmptyTextPlaceholder2.setOnClickListener {
-            showFilterMediaDialog()
-        }
 
         updateWidgets()
     }
@@ -177,8 +174,7 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
         }
 
         binding.mediaEmptyTextPlaceholder.setTextColor(getProperTextColor())
-        binding.mediaEmptyTextPlaceholder2.setTextColor(getProperPrimaryColor())
-        binding.mediaEmptyTextPlaceholder2.bringToFront()
+
 
         // do not refresh Random sorted files after opening a fullscreen image and going Back
         val isRandomSorting = config.getFolderSorting(mPath) and SORT_BY_RANDOM != 0
@@ -295,12 +291,11 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
         binding.mediaMenu.getToolbar().setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.sort -> showSortingDialog()
-                R.id.filter -> showFilterMediaDialog()
                 R.id.empty_recycle_bin -> emptyRecycleBin()
                 R.id.empty_disable_recycle_bin -> emptyAndDisableRecycleBin()
                 R.id.restore_all_files -> restoreAllFiles()
                 R.id.toggle_filename -> toggleFilenameVisibility()
-                R.id.open_camera -> launchCamera()
+                R.id.open_camera -> openPlayer()
                 R.id.folder_view -> switchToFolderView()
                 R.id.change_view_type -> changeViewType()
                 R.id.group -> showGroupByDialog()
@@ -311,12 +306,15 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
                 R.id.column_count -> changeColumnCount()
                 R.id.set_as_default_folder -> setAsDefaultFolder()
                 R.id.unset_as_default_folder -> unsetAsDefaultFolder()
-                R.id.slideshow -> startSlideshow()
                 R.id.settings -> launchSettings()
                 else -> return@setOnMenuItemClickListener false
             }
             return@setOnMenuItemClickListener true
         }
+    }
+
+    private fun openPlayer() {
+        startActivity(Intent(this,PlayerActivity::class.java))
     }
 
     private fun startSlideshow() {
@@ -486,14 +484,7 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
         }
     }
 
-    private fun showFilterMediaDialog() {
-        FilterMediaDialog(this) {
-            mLoadedInitialPhotos = false
-            binding.mediaRefreshLayout.isRefreshing = true
-            binding.mediaGrid.adapter = null
-            getMedia()
-        }
-    }
+
 
     private fun emptyRecycleBin() {
         showRecycleBinEmptyingDialog {
@@ -635,7 +626,6 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
             if (mPath == RECYCLE_BIN) {
                 binding.mediaEmptyTextPlaceholder.setText(com.cyberkey.commons.R.string.no_items_found)
                 binding.mediaEmptyTextPlaceholder.beVisible()
-                binding.mediaEmptyTextPlaceholder2.beGone()
             } else {
                 finish()
             }
@@ -877,7 +867,6 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
             binding.mediaRefreshLayout.isRefreshing = false
             binding.progressCircular.hide()
             binding.mediaEmptyTextPlaceholder.beVisibleIf(media.isEmpty() && !isFromCache)
-            binding.mediaEmptyTextPlaceholder2.beVisibleIf(media.isEmpty() && !isFromCache)
 
             if (binding.mediaEmptyTextPlaceholder.isVisible()) {
                 binding.mediaEmptyTextPlaceholder.text = getString(R.string.no_media_with_filters)

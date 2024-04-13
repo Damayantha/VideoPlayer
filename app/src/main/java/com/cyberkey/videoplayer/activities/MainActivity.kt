@@ -17,7 +17,6 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.cyberkey.commons.dialogs.CreateNewFolderDialog
 import com.cyberkey.commons.dialogs.FilePickerDialog
@@ -29,13 +28,13 @@ import com.cyberkey.commons.models.RadioItem
 import com.cyberkey.commons.views.MyGridLayoutManager
 import com.cyberkey.commons.views.MyRecyclerView
 import com.cyberkey.videoplayer.BuildConfig
+import com.cyberkey.videoplayer.PlayerActivity
 import com.cyberkey.videoplayer.R
 import com.cyberkey.videoplayer.adapters.DirectoryAdapter
 import com.cyberkey.videoplayer.databases.GalleryDatabase
 import com.cyberkey.videoplayer.databinding.ActivityMainBinding
 import com.cyberkey.videoplayer.dialogs.ChangeSortingDialog
 import com.cyberkey.videoplayer.dialogs.ChangeViewTypeDialog
-import com.cyberkey.videoplayer.dialogs.FilterMediaDialog
 import com.cyberkey.videoplayer.dialogs.GrantAllFilesDialog
 import com.cyberkey.videoplayer.extensions.*
 import com.cyberkey.videoplayer.helpers.*
@@ -60,7 +59,6 @@ import com.ironsource.mediationsdk.integration.IntegrationHelper
 import com.ironsource.mediationsdk.logger.IronSourceError
 import com.ironsource.mediationsdk.sdk.LevelPlayInterstitialListener
 import java.io.*
-import kotlin.math.log
 
 class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInterstitialListener, ImpressionDataListener {
     companion object {
@@ -210,12 +208,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
             config.saveFolderGrouping(SHOW_ALL, GROUP_BY_DATE_TAKEN_DAILY or GROUP_DESCENDING)
         }
 
-        if (!config.wasSVGShowingHandled) {
-            config.wasSVGShowingHandled = true
-            if (config.filterMedia and TYPE_SVGS == 0) {
-                config.filterMedia += TYPE_SVGS
-            }
-        }
+
 
         if (!config.wasSortingByNumericValueAdded) {
             config.wasSortingByNumericValueAdded = true
@@ -460,10 +453,8 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
         }
 
         binding.directoriesEmptyPlaceholder.setTextColor(getProperTextColor())
-        binding.directoriesEmptyPlaceholder2.setTextColor(primaryColor)
         binding.directoriesSwitchSearching.setTextColor(primaryColor)
         binding.directoriesSwitchSearching.underlineText()
-        binding.directoriesEmptyPlaceholder2.bringToFront()
 
         if (!binding.mainMenu.isSearchOpen) {
             refreshMenuItems()
@@ -622,8 +613,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
         binding.mainMenu.getToolbar().setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.sort -> showSortingDialog()
-                R.id.filter -> showFilterMediaDialog()
-                R.id.open_camera -> launchCamera()
+                R.id.open_camera -> openPlayer()
                 R.id.show_all -> showAllMedia()
                 R.id.change_view_type -> changeViewType()
                 R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()
@@ -640,6 +630,10 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
             }
             return@setOnMenuItemClickListener true
         }
+    }
+
+    private fun openPlayer() {
+        startActivity(Intent(this, PlayerActivity::class.java))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -759,8 +753,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
 
         mShouldStopFetching = true
         mIsGettingDirs = true
-        val getImagesOnly = mIsPickImageIntent || mIsGetImageContentIntent
-        val getVideosOnly = mIsPickVideoIntent || mIsGetVideoContentIntent
+
 
         getCachedDirectories(true) {
             gotDirectories(addTempFolderIfNeeded(it))
@@ -793,14 +786,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
         }
     }
 
-    private fun showFilterMediaDialog() {
-        FilterMediaDialog(this) {
-            mShouldStopFetching = true
-            binding.directoriesRefreshLayout.isRefreshing = true
-            binding.directoriesGrid.adapter = null
-            getDirectories()
-        }
-    }
+
 
     private fun showAllMedia() {
         config.showAll = true
@@ -1356,7 +1342,6 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
                 isPlaceholderVisible = false
                 runOnUiThread {
                     binding.directoriesEmptyPlaceholder.beGone()
-                    binding.directoriesEmptyPlaceholder2.beGone()
                     binding.directoriesFastscroller.beVisible()
                 }
             }
@@ -1440,35 +1425,22 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
 
     private fun checkPlaceholderVisibility(dirs: ArrayList<Directory>) {
         binding.directoriesEmptyPlaceholder.beVisibleIf(dirs.isEmpty() && mLoadedInitialPhotos)
-        binding.directoriesEmptyPlaceholder2.beVisibleIf(dirs.isEmpty() && mLoadedInitialPhotos)
 
         if (binding.mainMenu.isSearchOpen) {
             binding.directoriesEmptyPlaceholder.text = getString(com.cyberkey.commons.R.string.no_items_found)
-            binding.directoriesEmptyPlaceholder2.beGone()
         } else if (dirs.isEmpty() && config.filterMedia == getDefaultFileFilter()) {
             if (isRPlus() && !isExternalStorageManager()) {
                 binding.directoriesEmptyPlaceholder.text = getString(com.cyberkey.commons.R.string.no_items_found)
-                binding.directoriesEmptyPlaceholder2.beGone()
             } else {
                 binding.directoriesEmptyPlaceholder.text = getString(R.string.no_media_add_included)
-                binding.directoriesEmptyPlaceholder2.text = getString(R.string.add_folder)
             }
 
-            binding.directoriesEmptyPlaceholder2.setOnClickListener {
-                showAddIncludedFolderDialog {
-                    refreshItems()
-                }
-            }
+
         } else {
             binding.directoriesEmptyPlaceholder.text = getString(R.string.no_media_with_filters)
-            binding.directoriesEmptyPlaceholder2.text = getString(R.string.change_filters_underlined)
 
-            binding.directoriesEmptyPlaceholder2.setOnClickListener {
-                showFilterMediaDialog()
-            }
         }
 
-        binding.directoriesEmptyPlaceholder2.underlineText()
         binding.directoriesFastscroller.beVisibleIf(binding.directoriesEmptyPlaceholder.isGone())
     }
 
