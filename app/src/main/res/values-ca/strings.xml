@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">Galeria</string>
     <string name="edit">Edita</string>
     <string name="open_camera">Obre la càmera</string>
     <string name="hidden">(ocult)</string>

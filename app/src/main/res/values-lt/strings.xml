@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">Galerija</string>
     <string name="edit">Redaguoti</string>
     <string name="open_camera">Atidaryti fotoaparatą</string>
     <string name="hidden">(paslėpta)</string>

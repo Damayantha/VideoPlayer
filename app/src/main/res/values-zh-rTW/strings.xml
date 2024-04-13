@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">相簿</string>
     <string name="edit">編輯</string>
     <string name="open_camera">開啟相機</string>
     <string name="hidden">(隱藏)</string>

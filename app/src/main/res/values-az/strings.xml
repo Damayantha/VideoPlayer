@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">Qalereya</string>
     <string name="edit">Redaktə</string>
     <string name="open_camera">Kameranı aç</string>
     <string name="hidden">(gizli)</string>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">图库</string>
     <string name="edit">编辑</string>
     <string name="open_camera">打开相机</string>
     <string name="hidden">（已隐藏）</string>

@@ -35,7 +35,6 @@ import com.cyberkey.commons.helpers.*
 import com.cyberkey.commons.models.FileDirItem
 import com.cyberkey.videoplayer.BuildConfig
 import com.cyberkey.videoplayer.R
-import com.cyberkey.videoplayer.activities.EditActivity
 import com.cyberkey.videoplayer.activities.MediaActivity
 import com.cyberkey.videoplayer.activities.SettingsActivity
 import com.cyberkey.videoplayer.activities.SimpleActivity

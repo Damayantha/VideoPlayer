@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class App : Application() {
-    val ONESIGNAL_APP_ID = "e3e005f7-5a17-4adf-b5a8-5f65a94e2c41"
+    val ONESIGNAL_APP_ID = "e6d83716-ebfc-4b80-9624-14d4d369b52d"
     override fun onCreate() {
         super.onCreate()
         // Verbose Logging set to help debug issues, remove before releasing your app.

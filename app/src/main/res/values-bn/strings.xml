@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">গ্যালারি</string>
     <string name="edit">সম্পাদনা</string>
     <string name="open_camera">ক্যামেরা খুলুন</string>
     <string name="hidden">(লুকানো)</string>

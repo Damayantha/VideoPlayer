@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">Galéria</string>
     <string name="edit">Upraviť</string>
     <string name="open_camera">Otvoriť fotoaparát</string>
     <string name="hidden">(skryté)</string>

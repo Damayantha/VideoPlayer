@@ -65,7 +65,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener, LevelPlayInt
         private const val PICK_MEDIA = 2
         private const val PICK_WALLPAPER = 3
         private const val LAST_MEDIA_CHECK_PERIOD = 3000L
-        const val APP_KEY = "1a8eb0245"
+        const val APP_KEY = "1e29deebd"
         const val TAG = "MainActivity"
 
     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_launcher_name">갤러리</string>
     <string name="edit">편집</string>
     <string name="open_camera">카메라 열기</string>
     <string name="hidden">(숨겨짐)</string>
