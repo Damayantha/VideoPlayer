@@ -4,4 +4,5 @@
 
 Reference
 
-[![Just Player]]([https://play.google.com/store/apps/details?id=com.cyberkey.videoplayer](https://github.com/moneytoo/Player))
+[Just Player](https://github.com/moneytoo/Player)
+[Simple Gallery](https://github.com/SimpleMobileTools/Simple-Gallery)
